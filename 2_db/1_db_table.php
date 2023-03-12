@@ -37,6 +37,7 @@ TABLEHEAD;
 USERS;
     }
 echo "</table>";
+    $conn->close();
 ?>
 </body>
 </html>
