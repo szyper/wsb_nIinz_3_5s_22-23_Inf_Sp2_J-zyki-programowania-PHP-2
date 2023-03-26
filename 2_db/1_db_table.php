@@ -12,6 +12,14 @@
 <h4>Użytkownicy</h4>
 <?php
     require_once "./scripts/connect.php";
+    if (isset($_GET["deleteUser"])){
+	    if ($_GET["deleteUser"] == 0){
+		    echo "<h4>Nie usunięto rekordu</h4>";
+	    }else{
+		    echo "<h4>Usunięto rekord o id= $_GET[deleteUser]</h4>";
+	    }
+    }
+
     echo <<<TABLEHEAD
         <table>
             <tr>
@@ -23,21 +31,35 @@
             </tr>
 TABLEHEAD;
 
-    $sql = "SELECT * FROM `users` INNER JOIN `cities` ON `users`.`city_id`=`cities`.`id` INNER JOIN `states` ON `cities`.`state_id`=`states`.`id`;";
+    $sql = "SELECT users.id, users.firstName, users.lastName, users.birthday, cities.city, states.state FROM `users` INNER JOIN `cities` ON `users`.`city_id`=`cities`.`id` INNER JOIN `states` ON `cities`.`state_id`=`states`.`id`;";
     $result = $conn->query($sql);
-    while($user = $result->fetch_assoc()){
-	    echo <<< USERS
+//    echo $result->num_rows;
+    if ($result->num_rows == 0){
+      echo "<tr><td colspan='5'>Brak rekordów do wyświetlenia</td></tr>";
+    }else{
+	    while($user = $result->fetch_assoc()){
+		    echo <<< USERS
             <tr>
                 <td>$user[firstName]</td>
                 <td>$user[lastName]</td>
                 <td>$user[birthday]</td>
                 <td>$user[city]</td>
                 <td>$user[state]</td>
+                <td><a href="./scripts/delete_user.php?deleteUserId=$user[id]">Usuń</a></td>
             </tr>
 USERS;
+	    }
     }
-echo "</table>";
+echo "</table><hr>";
     $conn->close();
+    if (isset($_GET["addUserForm"])){
+      echo <<< ADDUSERFORM
+        <h4>Dodawanie użytkownika</h4>
+ADDUSERFORM;
+    }else{
+      echo "<a href=\"./1_db_table.php?addUserForm=1\">Dodaj użytkownika</a>";
+    }
 ?>
+
 </body>
 </html>
