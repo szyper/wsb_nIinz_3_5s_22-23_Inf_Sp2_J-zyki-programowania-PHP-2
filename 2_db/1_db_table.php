@@ -23,7 +23,7 @@
             </tr>
 TABLEHEAD;
 
-    $sql = "SELECT * FROM `users` INNER JOIN `cities` ON `users`.`city_id`=`cities`.`id` INNER JOIN `states` ON `cities`.`state_id`=`states`.`id`;;";
+    $sql = "SELECT * FROM `users` INNER JOIN `cities` ON `users`.`city_id`=`cities`.`id` INNER JOIN `states` ON `cities`.`state_id`=`states`.`id`;";
     $result = $conn->query($sql);
     while($user = $result->fetch_assoc()){
 	    echo <<< USERS
@@ -31,8 +31,8 @@ TABLEHEAD;
                 <td>$user[firstName]</td>
                 <td>$user[lastName]</td>
                 <td>$user[birthday]</td>
-                <td>$user[cityName]</td>
-                <td>$user[stateName]</td>
+                <td>$user[city]</td>
+                <td>$user[state]</td>
             </tr>
 USERS;
     }
