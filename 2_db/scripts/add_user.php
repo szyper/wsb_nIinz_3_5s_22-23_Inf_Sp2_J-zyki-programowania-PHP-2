@@ -31,4 +31,4 @@
 		$_SESSION["success"] = "Prawidłowo Dodano użytkownika $_POST[firstName] $_POST[lastName]";
 	}
 
-	header('location: ../2_db_table_delete_add.php');
+	header('location: ../3_db_table_delete_add_update.php');

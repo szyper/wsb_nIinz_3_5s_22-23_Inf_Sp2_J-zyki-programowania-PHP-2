@@ -1,0 +1,3 @@
+1) w tabeli wyświetlone miasto jest hiperłączem
+2) Po naciśnięciu wyświetla się formularz umożliwiający aktualizację nazwy miasta
+3) Zabezpieczyćprzed podanie miasta, które jest już dodane do tabeli cities
